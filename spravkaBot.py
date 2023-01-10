@@ -70,8 +70,10 @@ def bot_message(message):
             butt5 = types.KeyboardButton('Цефтриаксон')
             butt6 = types.KeyboardButton('Тиенам')
             butt7 = types.KeyboardButton('Ко-тримоксазол')
+            butt8 = types.KeyboardButton('Сульперазон')
+            butt9 = types.KeyboardButton('Тазоцин')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butback)
+            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9, butback)
             bot.send_message(message.chat.id, 'Выберите нужный антибиотик'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Ампициллин+сульбактам':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -84,7 +86,7 @@ def bot_message(message):
                                               '1500мг - 10мл\n'
                                               '10:00, 22:00\n'
                                               '2 раза в день\n'
-                                              'до 14 дней\n')
+                                              'до 14 дней')
         elif message.text == 'Амикацин':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bot.send_message(message.chat.id, 'Амикацин.\n'
@@ -148,6 +150,31 @@ def bot_message(message):
                                               'Off Label +\n'
                                               'Конечная концентрация 25мг/мл\n'
                                               'Инфузия 60-90мин.')
+        elif message.text == 'Сульперазон':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Сульперазон (Цефоперазон-Сульбактам\n,'
+                                              'Сульзонцеф, Сульмаграф)\n'
+                                              '40-80мг/кг*сут\n'
+                                              'При серъёзных инфекциях\n'
+                                              'до 160мг/кг*сут\n'
+                                              '250мг - 1мл\n'
+                                              '2р/сут\n'
+                                              'до 14 дней\n'
+                                              'Конечная концентрация 100мг/мл')
+        elif message.text == 'Тазоцин':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Тазоцин (Тациллин Дж,\n'
+                                              'Пиперациллин-Тазобактам)\n'
+                                              '50-100мг\n'
+                                              '<29нед 0-28 дней - 2р/сут\n'
+                                              'старше 28 дней - 3р/сут\n'
+                                              '30-36нед 0-14 дней - 2р/сут\n'
+                                              'старше 14 дней - 3р/сут\n'
+                                              '37-44нед до 7 дней - 2р/сут\n'
+                                              'После 45 нед ПКВ - 3р/сут\n'
+                                              '200мг - 1мл\n'
+                                              'Off Label +\n'
+                                              'Конечная концентрация 50мг/мл')
         elif message.text == 'Миорелаксанты':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Пипекурония бромид (ардуан)')
