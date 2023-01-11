@@ -16,6 +16,12 @@ def welcome(message):
     bot.reply_to(message, "Слева есть меню, которое Вам подскажет, если что непонятно.")
     bot.reply_to(message, "Для начала работы со мной нажмите сюда - '/help'.")
 
+@bot.message_handler(commands=['connect'])
+def welcome(message):
+    bot.reply_to(message, "Если у вас возникли вопросы по работе бота или содержимому справочника - то напишите мне на "
+                          "электронную почту с соответетствующей пометкой. Буду рад услышать конструктивные предложения. "
+                          "kijiassa@gmail.com")
+
 @bot.message_handler(commands=['help'])
 
 def tree_start_menu(message):
@@ -72,8 +78,9 @@ def bot_message(message):
             butt7 = types.KeyboardButton('Ко-тримоксазол')
             butt8 = types.KeyboardButton('Сульперазон')
             butt9 = types.KeyboardButton('Тазоцин')
+            butt10 = types.KeyboardButton('Ципрофлоксацин')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9, butback)
+            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9, butt10, butback)
             bot.send_message(message.chat.id, 'Выберите нужный антибиотик'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Ампициллин+сульбактам':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -175,6 +182,14 @@ def bot_message(message):
                                               '200мг - 1мл\n'
                                               'Off Label +\n'
                                               'Конечная концентрация 50мг/мл')
+        elif message.text == 'Ципрофлоксацин':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Ципрофлоксацин\n'
+                                              '10мг/кг\n'
+                                              '2мг - 1мл\n'
+                                              '3р/сут\n'
+                                              '10-14 дней\n'
+                                              'Off Label +')
         elif message.text == 'Миорелаксанты':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Пипекурония бромид (ардуан)')
@@ -202,6 +217,27 @@ def bot_message(message):
                                               'разово 0.6мг/кг\n'
                                               'титрование 0.3-0.6мг/кг*ч\n'
                                               'Короткий или средний')
+
+        elif message.text == 'Общий анализ крови':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            butt1 = types.KeyboardButton('Общий анализ')
+            butt2 = types.KeyboardButton('Лейкоформула')
+            butt3 = types.KeyboardButton('Красная кровь')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butt2, butt3, butback)
+            bot.send_message(message.chat.id, 'Выберите анализ'.format(message.from_user), reply_markup=markup)
+        elif message.text == 'Общий анализ':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/OAK.png')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'Лейкоформула':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Leicoformula.png')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'Красная кровь':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/RedBlood.png')
+            bot.send_photo(message.chat.id, photo)
         elif message.text == 'БЛД':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Гормональная терапия при БЛД')
