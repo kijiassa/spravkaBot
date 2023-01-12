@@ -295,15 +295,15 @@ def bot_message(message):
             bot.send_message(message.chat.id, 'Выберите анализ'.format(message.from_user), reply_markup=markup)
         elif message.text == 'Общий анализ':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            photo = open('Pictures/OAK.png')
+            photo = open('Pictures/OAK.png', 'rb')
             bot.send_photo(message.chat.id, photo)
         elif message.text == 'Лейкоформула':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            photo = open('Pictures/Leicoformula.png')
+            photo = open('Pictures/Leicoformula.png', 'rb')
             bot.send_photo(message.chat.id, photo)
         elif message.text == 'Красная кровь':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            photo = open('Pictures/RedBlood.png')
+            photo = open('Pictures/RedBlood.png', 'rb')
             bot.send_photo(message.chat.id, photo)
         elif message.text == 'БЛД':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
