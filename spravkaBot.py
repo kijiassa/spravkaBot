@@ -11,15 +11,19 @@ def after_term():
 @bot.message_handler(commands=['start'])
 def welcome(message):
     bot.reply_to(message, "Привет, я бот-справочник. У меня есть много разной полезной информации для врачей-реаниматологов. "
-                          "Шучу, пока ничего нет. Информация представлена в форме ветвящегося дерева - Вам достаточно просто "
+                          "Шучу, пока не очень много. Информация представлена в форме ветвящегося дерева - Вам достаточно просто "
                           "выбирать нужную кнопку.")
     bot.reply_to(message, "Слева есть меню, которое Вам подскажет, если что непонятно.")
     bot.reply_to(message, "Для начала работы со мной нажмите сюда - '/help'.")
+    bot.reply_to(message, "Последние дополнения. АБ: Сульмаграф, Тазоцин, Ципрофлоксацин. Анализы: Общий крови, лейкоформула, красная кровь. "
+                          "Анальгоседация: Фентанил, Промедол, Кетамин, Трамадол, Диазепам, Мидазолам, Натрия оксибутират. "
+                          "Добавлен адрес для обратной связи.")
 
 @bot.message_handler(commands=['connect'])
 def welcome(message):
-    bot.reply_to(message, "Если у вас возникли вопросы по работе бота или содержимому справочника - то напишите мне на "
-                          "электронную почту с соответетствующей пометкой. Буду рад услышать конструктивные предложения. "
+    bot.reply_to(message, "Если у вас возникли вопросы по работе бота или содержимому справочника (исправить или "
+                          "предложить что добавить ещё и куда - то напишите мне на электронную почту с "
+                          "соответствующей пометкой. Буду рад услышать конструктивные предложения. "
                           "kijiassa@gmail.com")
 
 @bot.message_handler(commands=['help'])
@@ -42,10 +46,11 @@ def bot_message(message):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             item1 = types.KeyboardButton('Антибиотики')
             item2 = types.KeyboardButton('Миорелаксанты')
-            item3 = types.KeyboardButton('Сердечные')
-            item4 = types.KeyboardButton('Пероральные')
+            item3 = types.KeyboardButton('Анальгоседация')
+            item4 = types.KeyboardButton('Сердечные')
+            item5 = types.KeyboardButton('Пероральные')
             butback = types.KeyboardButton('В начало')
-            markup.add(item1, item2, item3, item4, butback)
+            markup.add(item1, item2, item3, item4, item5, butback)
             bot.send_message(message.chat.id, 'Выберите группу препаратов'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Лаборатория':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -217,6 +222,68 @@ def bot_message(message):
                                               'разово 0.6мг/кг\n'
                                               'титрование 0.3-0.6мг/кг*ч\n'
                                               'Короткий или средний')
+        elif message.text == 'Анальгоседация':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            butt1 = types.KeyboardButton('Фентанил')
+            butt2 = types.KeyboardButton('Промедол')
+            butt3 = types.KeyboardButton('Кетамин')
+            butt4 = types.KeyboardButton('Трамадол')
+            butt5 = types.KeyboardButton('Диазепам')
+            butt6 = types.KeyboardButton('Мидазолам')
+            butt7 = types.KeyboardButton('Натрия оксибутират')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butback)
+            bot.send_message(message.chat.id, 'Выберите нужный анальгетик'.format(message.from_user),reply_markup=markup)
+        elif message.text == 'Фентанил':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Фентанил\n'
+                                              '0.25-3мкг/кг каждые 4-6ч\n'
+                                              'длительность 2-4 часа\n'
+                                              'капельно 1-10мкг/кг*ч\n'
+                                              'Влияет на дыхательный центр')
+        elif message.text == 'Промедол':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Промедол\n'
+                                              '0.05-0.2мг/кг\n
+                                              'в течение 10минут\n'
+                                              'каждые 4-6 часов\n'
+                                              'длительность 2-4 часа\n'
+                                              'капельно 0.1-0.2мкг/кг*ч')
+        elif message.text == 'Кетамин':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Кетамин\n'
+                                              '0.5мг/кг каждые 15-30мин\n'
+                                              'длительность 0.5 часа\n'
+                                              'капельно 500-1000мкг/кг*ч\n'
+                                              '*Александрович')
+        elif message.text == 'Трамадол':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Трамадол\n'
+                                              'разово 1-2мг/кг\n'
+                                              'капельно 0.1-0.2мг/кг*ч')
+        elif message.text == 'Диазепам':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Диазепам (Реланиум)\n'
+                                              'разово 0.1-0.3мг/кг\n'
+                                              'капельно 0.1-0.2мг/кг*ч\n'
+                                              'Инфузия на воде для инъекций')
+        elif message.text == 'Мидазолам':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Мидазолам\n'
+                                              'разово 0.05(0.1)-0.2(0.5)мг/кг\n'
+                                              'в течение 5 минут\n'
+                                              'капельно: >32 недель\n'
+                                              '0.03мг/кг*ч (0.05мкг/кг*мин)\n'
+                                              '<32 недель\n'
+                                              '0.06мг/кг*ч (1мкг/кг*мин)\n'
+                                              '0.1-0.3мг/кг*ч (по Рооз)\n'
+                                              'Off Label до 3х месяцев')
+        elif message.text == 'Натрия оксибутират':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Натрия оксибутират\n'
+                                              'разово 50-100мг/кг\n'
+                                              'капельно 20-60мг/кг*ч\n'
+                                              'В качестве противосудорожной терапии')
 
         elif message.text == 'Общий анализ крови':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
