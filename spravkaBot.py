@@ -244,7 +244,7 @@ def bot_message(message):
         elif message.text == 'Промедол':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bot.send_message(message.chat.id, 'Промедол\n'
-                                              '0.05-0.2мг/кг\n
+                                              '0.05-0.2мг/кг\n'
                                               'в течение 10минут\n'
                                               'каждые 4-6 часов\n'
                                               'длительность 2-4 часа\n'
