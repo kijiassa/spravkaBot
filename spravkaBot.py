@@ -15,9 +15,8 @@ def welcome(message):
                           "выбирать нужную кнопку.")
     bot.reply_to(message, "Слева есть меню, которое Вам подскажет, если что непонятно.")
     bot.reply_to(message, "Для начала работы со мной нажмите сюда - '/help'.")
-    bot.reply_to(message, "Последние дополнения. АБ: Сульмаграф, Тазоцин, Ципрофлоксацин. Анализы: Общий крови, лейкоформула, красная кровь. "
-                          "Анальгоседация: Фентанил, Промедол, Кетамин, Трамадол, Диазепам, Мидазолам, Натрия оксибутират. "
-                          "Добавлен адрес для обратной связи.")
+    bot.reply_to(message, "Последние дополнения. АБ: Максиктам. Противогрибковые/вирусные: Флуконазол, Амфотерицин В, Ацикловир. "
+                          "Анализ ликвора. Фраза о важном.")
 
 @bot.message_handler(commands=['connect'])
 def welcome(message):
@@ -25,6 +24,14 @@ def welcome(message):
                           "предложить что добавить ещё и куда - то напишите мне на электронную почту с "
                           "соответствующей пометкой. Буду рад услышать конструктивные предложения. "
                           "kijiassa@gmail.com")
+
+@bot.message_handler(commands=['pravo'])
+def welcome(message):
+    bot.reply_to(message, "Информация изложенная в данном боте-справочнике хоть и основана на официальных протоколах, инструкциях, "
+                          "литературных источниках, но носит исключительно рекомендательный характер и не обязательна к "
+                          "исполнению. Обязательно проверьте используемые данные, если есть хоть малейшие сомнения. Я, как "
+                          "все остальные, могу ошибаться. А ответственность всегда лежит на враче.")
+
 
 @bot.message_handler(commands=['help'])
 
@@ -331,7 +338,6 @@ def bot_message(message):
                                               '14-21 день\n'
                                               'Off Label +')
 
-
         elif message.text == 'Общий анализ крови':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Общий анализ')
@@ -368,6 +374,7 @@ def bot_message(message):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             photo = open('Pictures/Cerebrospin Nedon.png', 'rb')
             bot.send_photo(message.chat.id, photo)
+
         elif message.text == 'БЛД':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Гормональная терапия при БЛД')
@@ -408,6 +415,7 @@ def bot_message(message):
                                               '1-3 день - 2мг/кг*сут на 2 приёма\n'
                                               '4-6 день - 1мг/кг*сут на 2 приёма\n'
                                               '6-10 день - 1мг/кг*сут через день')
+
         elif message.text == 'В начало':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Лекарства')
