@@ -47,7 +47,7 @@ def bot_message(message):
             item1 = types.KeyboardButton('Антибиотики')
             item2 = types.KeyboardButton('Миорелаксанты')
             item3 = types.KeyboardButton('Анальгоседация')
-            item4 = types.KeyboardButton('Сердечные')
+            item4 = types.KeyboardButton('Противогрибковые/вирусные')
             item5 = types.KeyboardButton('Пероральные')
             butback = types.KeyboardButton('В начало')
             markup.add(item1, item2, item3, item4, item5, butback)
@@ -72,6 +72,7 @@ def bot_message(message):
             butback = types.KeyboardButton('В начало')
             markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butback)
             bot.send_message(message.chat.id, 'Выберите патологию'.format(message.from_user),reply_markup=markup)
+
         elif message.text == 'Антибиотики':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Амикацин')
@@ -84,8 +85,9 @@ def bot_message(message):
             butt8 = types.KeyboardButton('Сульперазон')
             butt9 = types.KeyboardButton('Тазоцин')
             butt10 = types.KeyboardButton('Ципрофлоксацин')
+            butt11 = types.KeyboardButton('Максиктам')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9, butt10, butback)
+            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9, butt10, butt11, butback)
             bot.send_message(message.chat.id, 'Выберите нужный антибиотик'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Ампициллин+сульбактам':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -195,6 +197,15 @@ def bot_message(message):
                                               '3р/сут\n'
                                               '10-14 дней\n'
                                               'Off Label +')
+        elif message.text == 'Максиктам':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Максиктам (Цефепим+Сульбактам)\n'
+                                              '50мг/кг по Цефепиму\n'
+                                              '1000мг - 1мл\n'
+                                              '2р/сут\n'
+                                              '10 дней\n'
+                                              'Off Label + до 2х мес.\n'
+                                              'Конечная концентрация 40мг/мл')
 
         elif message.text == 'Миорелаксанты':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -286,6 +297,40 @@ def bot_message(message):
                                               'разово 50-100мг/кг\n'
                                               'капельно 20-60мг/кг*ч\n'
                                               'В качестве противосудорожной терапии')
+
+        elif message.text == 'Противогрибковые/вирусные':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            butt1 = types.KeyboardButton('Флуконазол')
+            butt2 = types.KeyboardButton('Амфотерицин В')
+            butt3 = types.KeyboardButton('Ацикловир')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butt2, butt3, butback)
+            bot.send_message(message.chat.id, 'Выберите нужный противогрибковый/вирусный препарат'.format(message.from_user),reply_markup=markup)
+        elif message.text == 'Флуконазол':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Флуконазол (Дифлюкан)\n'
+                                              'профилактическая 5мг/кг *1р/3дня\n'
+                                              'лечебная 12мг/кг *1р/сут\n'
+                                              '2мг - 1мл\n'
+                                              'в/в капельно за 30-60мин')
+        elif message.text == 'Амфотерицин В':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Амфотерицин В\n'
+                                              '20мг/кг\n'
+                                              '5мг - 1мл (5000 ЕД - 1мл)\n'
+                                              '1р/сут в течение 2-6 часов\n'
+                                              'до 20 дней\n'
+                                              'Конечная концентрация 0.1мг/мл\n'
+                                              'Разводится на 5% глюкозе')
+        elif message.text == 'Ацикловир':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Ацикловир\n'
+                                              '20мг/кг\n'
+                                              '25мг - 1мл\n'
+                                              '3р/сут\n'
+                                              '14-21 день\n'
+                                              'Off Label +')
+
 
         elif message.text == 'Общий анализ крови':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
