@@ -16,7 +16,7 @@ def welcome(message):
     bot.reply_to(message, "Слева есть меню, которое Вам подскажет, если что непонятно.")
     bot.reply_to(message, "Для начала работы со мной нажмите сюда - '/help'.")
     bot.reply_to(message, "Последние дополнения. АБ: Максиктам. Противогрибковые/вирусные: Флуконазол, Амфотерицин В, Ацикловир. "
-                          "Анализ ликвора. Фраза о важном.")
+                          "Анализ ликвора. Электролитный обмен: Обмен Кальция: Гипокальциемия. Фраза о важном.")
 
 @bot.message_handler(commands=['connect'])
 def welcome(message):
@@ -70,14 +70,10 @@ def bot_message(message):
             bot.send_message(message.chat.id, 'Выберите группу анализов'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Патологии':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            butt1 = types.KeyboardButton('РДС')
-            butt2 = types.KeyboardButton('Ишемия мозга')
-            butt3 = types.KeyboardButton('Гемолитическая болезнь')
-            butt4 = types.KeyboardButton('Аспирация мекония')
-            butt5 = types.KeyboardButton('Хирургические патологии')
-            butt6 = types.KeyboardButton('БЛД')
+            butt1 = types.KeyboardButton('БЛД')
+            butt2 = types.KeyboardButton('Электролитные нарушения')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butback)
+            markup.add(butt1, butt2, butback)
             bot.send_message(message.chat.id, 'Выберите патологию'.format(message.from_user),reply_markup=markup)
 
         elif message.text == 'Антибиотики':
@@ -416,6 +412,50 @@ def bot_message(message):
                                               '4-6 день - 1мг/кг*сут на 2 приёма\n'
                                               '6-10 день - 1мг/кг*сут через день')
 
+        elif message.text == 'Электролитные нарушения':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            butt1 = types.KeyboardButton('Обмен кальция')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butback)
+            bot.send_message(message.chat.id, 'Что вы хотите посмотреть про обмен электролитов?'.format(message.from_user),reply_markup=markup)
+        elif message.text == 'Обмен кальция':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Kalcii_norma.jpg', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            bot.send_message(message.chat.id, 'Соотношение величин.\n'
+                                              '1ммоль/л - 4мг/дл\n'
+                                              '1мэкв - 20мг\n'
+                                              '1мэкв/л - 0.5ммоль/л')
+            bot.send_message(message.chat.id, 'В парентеральном питании.\n'
+                                              'Начало с 1х суток.\n'
+                                              'По кальция глюконату 10%.\n'
+                                              '4.4мл CaGluc = 1ммоль Ca\n'
+                                              '1-2-3мл/кг*сут\n'
+                                              '2-4мл/кг*сут для ЭНМТ')
+            butt1 = types.KeyboardButton('Гипокальциемия')
+            butt2 = types.KeyboardButton('Гиперкальциемия')
+            butt3 = types.KeyboardButton('Электролитные нарушения')
+            markup.add(butt1, butt2, butt3)
+            bot.send_message(message.chat.id, 'Какой вид нарушения кальция?'.format(message.from_user), reply_markup=markup)
+        elif message.text == 'Гипокальциемия':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/GipoKalcii_algoritm.jpg', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            bot.send_message(message.chat.id, 'Содержание ионизированного кальция в растворах.\n'
+                                              'Кальция хлорид 10% - 36мг/мл\n'
+                                              'Кальция глюконат 10% - 9мг/мл\n'
+                                              'Кальция лактат 10% - 13мг/мл')
+            bot.send_message(message.chat.id, 'Бессимптомная гипокальциемия.'
+                                              'Недоношенным. Кальция глюконат 10%.\n'
+                                              '5-10мл/сут внутрь или 1-2мл/кг в/в\n'
+                                              'Гипокальциемия.\n'
+                                              '<1ммоль/л при m> 1500г или <0.8ммоль при m< 1500г\n'
+                                              'В/в инфузия 40-50мг/кг*сут, но доза\n'
+                                              'больше 20-30мг/кг*сут - много нежелательных эффектов.\n'
+                                              'Гипокальциемия с клиникой (судоророги, нарушения ритма)\n'
+                                              'Болюсно Кальция глюконат 1-2мл/кг\n'
+                                              'Максимум: 5.0мл для недоношенных, 10.0мл для доношенных\n'
+                                              'Скорость не более 1мл/мин')
         elif message.text == 'В начало':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Лекарства')
