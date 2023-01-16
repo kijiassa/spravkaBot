@@ -1,7 +1,7 @@
 import telebot
 #import config
 from telebot import types
-TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token from @BotFather
+TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token from @BotFather
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -195,6 +195,7 @@ def bot_message(message):
                                               '3р/сут\n'
                                               '10-14 дней\n'
                                               'Off Label +')
+
         elif message.text == 'Миорелаксанты':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Пипекурония бромид (ардуан)')
@@ -222,6 +223,7 @@ def bot_message(message):
                                               'разово 0.6мг/кг\n'
                                               'титрование 0.3-0.6мг/кг*ч\n'
                                               'Короткий или средний')
+
         elif message.text == 'Анальгоседация':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Фентанил')
@@ -292,7 +294,7 @@ def bot_message(message):
             butt3 = types.KeyboardButton('Красная кровь')
             butback = types.KeyboardButton('В начало')
             markup.add(butt1, butt2, butt3, butback)
-            bot.send_message(message.chat.id, 'Выберите анализ'.format(message.from_user), reply_markup=markup)
+            bot.send_message(message.chat.id, 'Выберите нужный анализ крови'.format(message.from_user), reply_markup=markup)
         elif message.text == 'Общий анализ':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             photo = open('Pictures/OAK.png', 'rb')
@@ -304,6 +306,22 @@ def bot_message(message):
         elif message.text == 'Красная кровь':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             photo = open('Pictures/RedBlood.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+
+        elif message.text == 'Анализ ликвора':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            butt1 = types.KeyboardButton('Ликвор по Рооз')
+            butt2 = types.KeyboardButton('Ликвор по сроку гестации')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butt2, butback)
+            bot.send_message(message.chat.id, 'Выберите нужный анализ ликвора'.format(message.from_user), reply_markup=markup)
+        elif message.text == 'Ликвор по Рооз':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Cerebrospin Roos.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'Ликвор по сроку гестации':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Cerebrospin Nedon.png', 'rb')
             bot.send_photo(message.chat.id, photo)
         elif message.text == 'БЛД':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
