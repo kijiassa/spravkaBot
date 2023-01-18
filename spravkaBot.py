@@ -1,7 +1,7 @@
 import telebot
 #import config
 from telebot import types
-TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token from @BotFather
+TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token from @BotFather
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -20,7 +20,8 @@ def welcome(message):
 
 @bot.message_handler(commands=['connect'])
 def welcome(message):
-    bot.reply_to(message, "Если у вас возникли вопросы по работе бота или содержимому справочника (исправить или "
+    bot.reply_to(message, "Здравствуйте, меня зовут Алексей Мухин, "
+                          "Если у вас возникли вопросы по работе бота или содержимому справочника (исправить или "
                           "предложить что добавить ещё и куда - то напишите мне на электронную почту с "
                           "соответствующей пометкой. Буду рад услышать конструктивные предложения. "
                           "kijiassa@gmail.com")
