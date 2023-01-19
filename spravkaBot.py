@@ -1,7 +1,7 @@
 import telebot
 #import config
 from telebot import types
-TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token from @BotFather
+TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token from @BotFather
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -16,7 +16,8 @@ def welcome(message):
     bot.reply_to(message, "Слева есть меню, которое Вам подскажет, если что непонятно.")
     bot.reply_to(message, "Для начала работы со мной нажмите сюда - '/help'.")
     bot.reply_to(message, "Последние дополнения. АБ: Максиктам. Противогрибковые/вирусные: Флуконазол, Амфотерицин В, Ацикловир. "
-                          "Анализ ликвора. Электролитный обмен: Обмен Кальция: Гипокальциемия. Фраза о важном.")
+                          "Анализ ликвора. Метаболические нарушения: Обмен Кальция: Гипокальциемия. Обмен глюкозы: "
+                          "Гипогликемия, Гипергликемия. Фраза о важном.")
     user_id = message.from_user.id
     user_name = message.from_user.first_name
     print (f"Имя - {user_name}, ID - {user_id}")
@@ -78,7 +79,7 @@ def bot_message(message):
         elif message.text == 'Патологии':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('БЛД')
-            butt2 = types.KeyboardButton('Электролитные нарушения')
+            butt2 = types.KeyboardButton('Метаболические нарушения')
             butback = types.KeyboardButton('В начало')
             markup.add(butt1, butt2, butback)
             bot.send_message(message.chat.id, 'Выберите патологию'.format(message.from_user),reply_markup=markup)
@@ -419,12 +420,13 @@ def bot_message(message):
                                               '4-6 день - 1мг/кг*сут на 2 приёма\n'
                                               '6-10 день - 1мг/кг*сут через день')
 
-        elif message.text == 'Электролитные нарушения':
+        elif message.text == 'Метаболические нарушения':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Обмен кальция')
+            butt2 = types.KeyboardButton('Обмен глюкозы')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butback)
-            bot.send_message(message.chat.id, 'Что вы хотите посмотреть про обмен электролитов?'.format(message.from_user),reply_markup=markup)
+            markup.add(butt1, butt2, butback)
+            bot.send_message(message.chat.id, 'Что вы хотите посмотреть про особенности метаболизма?'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Обмен кальция':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             photo = open('Pictures/Kalcii_norma.jpg', 'rb')
@@ -463,6 +465,43 @@ def bot_message(message):
                                               'Болюсно Кальция глюконат 1-2мл/кг\n'
                                               'Максимум: 5.0мл для недоношенных, 10.0мл для доношенных\n'
                                               'Скорость не более 1мл/мин')
+
+        elif message.text == 'Обмен глюкозы':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Glucosa_Potrebnost.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            butt1 = types.KeyboardButton('Гипогликемия')
+            butt2 = types.KeyboardButton('Гипергликемия')
+            butt3 = types.KeyboardButton('Метаболические нарушения')
+            markup.add(butt1, butt2, butt3)
+            bot.send_message(message.chat.id, 'Какой вид нарушения глюкозы?'.format(message.from_user), reply_markup=markup)
+        elif message.text == 'Гипогликемия':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Гипогликемия - меньше <b>2.6ммоль/л</b>\n'
+                                              '1. Ранняя неонатальная (первые 6-12ч). ЗВУР, матери с СД, '
+                                              'тяжёлая ГБН, асфиксия.\n'
+                                              '2. Транзиторная (12-48ч). Недоношенные, ЗВУР, близнецы, '
+                                              'полицитемия.\n'
+                                              '3. Вторичная (любой возраст). Сепсис, нарушением терморежима, '
+                                              'ятрогения, поражение ЦНС, кровоизлияние в надпочечники, матери- '
+                                              'антидиабетические препараты, глюкокортикоиды, салицилаты.\n'
+                                              '4. Персистирующая (после 7 суток).', parse_mode='html')
+            bot.send_message(message.chat.id, 'Коррекция гипогликемии:\n'
+                                              '1. Глюкоза 2-4мл/кг 20% или, лучше, 4-8мл/кг 10% '
+                                              'со скоростью не более 1.0мл/мин за 5 минут. Затем переход '
+                                              'на постоянную инфузию 10% 2.4-4.6мл/кг*ч (4-8мг/кг*мин) '
+                                              'по потребности. Контроль через 30 минут.\n'
+                                              '2. Постоянная инфузия 6-8мкг/кг*мин 10% глюкозы. '
+                                              'Второй способ дольше, но более плавный.\n'
+                                              'При сохранении гипогликемии - скорость повышается до 10мл/кг*ч 10% глюкозы.\n'
+                                              'При продолжении сохранения гипогликемии - контринсулярная терапия.\n'
+                                              'Глюкагон (0.1-0.5мг/кг в/м *2р/сут)\n'
+                                              'Гидрокортизон (5-10мг/кг*сут) или преднизолон (2-3мг/кг*сут)')
+        elif message.text == 'Гипергликемия':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Glucosa_Giperglicemia.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+
         elif message.text == 'В начало':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Лекарства')
