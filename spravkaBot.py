@@ -1,7 +1,7 @@
 import telebot
 #import config
 from telebot import types
-TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token from @BotFather
+TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token from @BotFather
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -17,6 +17,12 @@ def welcome(message):
     bot.reply_to(message, "Для начала работы со мной нажмите сюда - '/help'.")
     bot.reply_to(message, "Последние дополнения. АБ: Максиктам. Противогрибковые/вирусные: Флуконазол, Амфотерицин В, Ацикловир. "
                           "Анализ ликвора. Электролитный обмен: Обмен Кальция: Гипокальциемия. Фраза о важном.")
+    user_id = message.from_user.id
+    user_name = message.from_user.first_name
+    print (f"Имя - {user_name}, ID - {user_id}")
+    file = open(str (user_name)+'.txt','w')
+    file.write(f"ID - {user_id}, name - {user_name}\n")
+    file.close()
 
 @bot.message_handler(commands=['connect'])
 def welcome(message):
