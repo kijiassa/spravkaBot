@@ -1,12 +1,31 @@
 import telebot
+import os
+
 #import config
 from telebot import types
-TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token from @BotFather
+TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token from @BotFather
 
 bot = telebot.TeleBot(TOKEN)
 
 def after_term():
     bot.send_message("Для начала работы со мной нажмите сюда - '/help'.")
+
+path = r"C:\Users\Алексей\PycharmProjects\spravkaBot"
+os.chdir(path)
+
+def read_text_file(file_path):
+    with open(file_path,'r') as f:
+        f.seek(5)
+        unk_id = f.read(9)
+        print(unk_id)
+
+for file in os.listdir():
+    if file.endswith(".txt"):
+        file_path = f'{path}\{file}'
+
+        read_text_file(file_path)
+
+
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -20,10 +39,12 @@ def welcome(message):
                           "Гипогликемия, Гипергликемия. Фраза о важном.")
     user_id = message.from_user.id
     user_name = message.from_user.first_name
-    print (f"Имя - {user_name}, ID - {user_id}")
-    file = open(str (user_name)+'.txt','w')
+    print (f"ID - {user_id}, Name - {user_name}")
+    file = open(str (user_id)+'.txt','w')
     file.write(f"ID - {user_id}, name - {user_name}\n")
     file.close()
+
+
 
 @bot.message_handler(commands=['connect'])
 def welcome(message):
@@ -443,7 +464,7 @@ def bot_message(message):
                                               '2-4мл/кг*сут для ЭНМТ')
             butt1 = types.KeyboardButton('Гипокальциемия')
             butt2 = types.KeyboardButton('Гиперкальциемия')
-            butt3 = types.KeyboardButton('Электролитные нарушения')
+            butt3 = types.KeyboardButton('Метаболические нарушения')
             markup.add(butt1, butt2, butt3)
             bot.send_message(message.chat.id, 'Какой вид нарушения кальция?'.format(message.from_user), reply_markup=markup)
         elif message.text == 'Гипокальциемия':
