@@ -1,7 +1,4 @@
 import telebot
-import os
-
-#import config
 from telebot import types
 TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token from @BotFather
 
@@ -10,22 +7,20 @@ bot = telebot.TeleBot(TOKEN)
 def after_term():
     bot.send_message("Для начала работы со мной нажмите сюда - '/help'.")
 
-path = r"C:\Users\Алексей\PycharmProjects\spravkaBot"
-os.chdir(path)
-
-def read_text_file(file_path):
-    with open(file_path,'r') as f:
-        f.seek(5)
-        unk_id = f.read(9)
-        print(unk_id)
-
-for file in os.listdir():
-    if file.endswith(".txt"):
-        file_path = f'{path}\{file}'
-
-        read_text_file(file_path)
-
-
+def ID_list (zz):
+    new_list = []
+    with open('tumbd.txt','r+') as f:
+        s = f.readlines()
+        for x in s:
+            x_res = int(x[:12])
+            new_list.append(x_res)
+    if zz not in new_list:
+        new_list.append(zz)
+    print(len(new_list))
+    delim = '\n'
+    ww = delim.join(map(str,new_list))
+    with open('tumbd.txt','w') as f:
+        f.write(ww)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -39,12 +34,7 @@ def welcome(message):
                           "Гипогликемия, Гипергликемия. Фраза о важном.")
     user_id = message.from_user.id
     user_name = message.from_user.first_name
-    print (f"ID - {user_id}, Name - {user_name}")
-    file = open(str (user_id)+'.txt','w')
-    file.write(f"ID - {user_id}, name - {user_name}\n")
-    file.close()
-
-
+    ID_list(user_id)
 
 @bot.message_handler(commands=['connect'])
 def welcome(message):
