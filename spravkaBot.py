@@ -22,6 +22,13 @@ def ID_list (zz):
     with open('tumbd.txt','w') as f:
         f.write(ww)
 
+new_list =[]
+with open('tumbd.txt', 'r') as f_rass:
+    rass_list = f_rass.readlines()
+    for rass in rass_list:
+        x_rass = int(rass[:12])
+        bot.send_message(text='Сегодня новое в нашей программе: ', chat_id=x_rass)
+
 @bot.message_handler(commands=['start'])
 def welcome(message):
     bot.reply_to(message, "Привет, я бот-справочник. У меня есть много разной полезной информации для врачей-реаниматологов. "
@@ -29,9 +36,6 @@ def welcome(message):
                           "выбирать нужную кнопку.")
     bot.reply_to(message, "Слева есть меню, которое Вам подскажет, если что непонятно.")
     bot.reply_to(message, "Для начала работы со мной нажмите сюда - '/help'.")
-    bot.reply_to(message, "Последние дополнения. АБ: Максиктам. Противогрибковые/вирусные: Флуконазол, Амфотерицин В, Ацикловир. "
-                          "Анализ ликвора. Метаболические нарушения: Обмен Кальция: Гипокальциемия. Обмен глюкозы: "
-                          "Гипогликемия, Гипергликемия. Фраза о важном.")
     user_id = message.from_user.id
     user_name = message.from_user.first_name
     ID_list(user_id)
