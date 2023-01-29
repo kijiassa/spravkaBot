@@ -27,7 +27,8 @@ with open('tumbd.txt', 'r') as f_rass:
     rass_list = f_rass.readlines()
     for rass in rass_list:
         x_rass = int(rass[:12])
-        bot.send_message(text='Сегодня новое в нашей программе: ', chat_id=x_rass)
+        bot.send_message(text='Я буду иногда тестить тут и перезапускать, поэтому тебе могут '
+                              'приходить сообщения ), напиши, когда придёт в первый раз', chat_id=x_rass)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -78,16 +79,15 @@ def bot_message(message):
             item2 = types.KeyboardButton('Миорелаксанты')
             item3 = types.KeyboardButton('Анальгоседация')
             item4 = types.KeyboardButton('Противогрибковые/вирусные')
-            item5 = types.KeyboardButton('Пероральные')
             butback = types.KeyboardButton('В начало')
-            markup.add(item1, item2, item3, item4, item5, butback)
+            markup.add(item1, item2, item3, item4, butback)
             bot.send_message(message.chat.id, 'Выберите группу препаратов'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Лаборатория':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Общий анализ крови')
-            butt2 = types.KeyboardButton('Биохимия')
+            butt2 = types.KeyboardButton('Биохимия (в работе)')
             butt3 = types.KeyboardButton('Анализ ликвора')
-            butt4 = types.KeyboardButton('Анализ мочи')
+            butt4 = types.KeyboardButton('Анализ мочи (в работе)')
             butback = types.KeyboardButton('В начало')
             markup.add(butt1, butt2, butt3, butt4, butback)
             bot.send_message(message.chat.id, 'Выберите группу анализов'.format(message.from_user),reply_markup=markup)
@@ -95,8 +95,9 @@ def bot_message(message):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('БЛД')
             butt2 = types.KeyboardButton('Метаболические нарушения')
+            butt3 = types.KeyboardButton('Гипотермия')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butback)
+            markup.add(butt1, butt2, butt3, butback)
             bot.send_message(message.chat.id, 'Выберите патологию'.format(message.from_user),reply_markup=markup)
 
         elif message.text == 'Антибиотики':
@@ -457,7 +458,7 @@ def bot_message(message):
                                               '1-2-3мл/кг*сут\n'
                                               '2-4мл/кг*сут для ЭНМТ')
             butt1 = types.KeyboardButton('Гипокальциемия')
-            butt2 = types.KeyboardButton('Гиперкальциемия')
+            butt2 = types.KeyboardButton('Гиперкальциемия (в работе)')
             butt3 = types.KeyboardButton('Метаболические нарушения')
             markup.add(butt1, butt2, butt3)
             bot.send_message(message.chat.id, 'Какой вид нарушения кальция?'.format(message.from_user), reply_markup=markup)
@@ -517,6 +518,112 @@ def bot_message(message):
             photo = open('Pictures/Glucosa_Giperglicemia.png', 'rb')
             bot.send_photo(message.chat.id, photo)
 
+        elif message.text == 'Гипотермия':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'В основе - клинические рекомендации 2019г\n'
+                                              'Р21.0 Тяжёлая асфиксия при рождении\n'
+                                              'Р91.0 Церебральная ишемия')
+            butt1 = types.KeyboardButton('Показания к гипотермии')
+            butt2 = types.KeyboardButton('Противопоказания к гипотермии')
+            butt3 = types.KeyboardButton('Действия на этапе роддома')
+            butt4 = types.KeyboardButton('Этап согревания')
+            butt5 = types.KeyboardButton('Экстренное прекращение гипотермии')
+            butt6 = types.KeyboardButton('Обследования при гипотермии')
+            butt7 = types.KeyboardButton('Целевые витальные показатели при гипотермии')
+            butt8 = types.KeyboardButton('Особенности проведения гипотермии')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butback)
+            bot.send_message(message.chat.id, 'Что вы хотите посмотреть про гипотермию?'.format(message.from_user),reply_markup=markup)
+        elif message.text == 'Показания к гипотермии':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Хотя бы один критерий в каждой группе!\n'
+                                              'Критерии А\n'
+                                              '- Апгар <=5 на 10й мин. или\n'
+                                              '- сохраняется потребность в ИВЛ на 10й мин. или\n'
+                                              '- в первом анализе до 60мин. рН < 7.0 или\n'
+                                              '- в первом анализе до 60мин. (ВЕ) >= 16моль/л\n'
+                                              'Критерии В\n'
+                                              '- клинически выраженные судороги или\n'
+                                              '- мышечная гипотония и гипорефлексия или\n'
+                                              '- выраженный гипертонус и гипорефлексия или\n'
+                                              '- нарушения зрачкового рефлекса (реакция на свет)\n'
+                                              'Критерии С\n'
+                                              '- показатели на ЭЭГ (опущены по тех.причине, показания оцениваются '
+                                              'только по критериям групп А и В)\n')
+        elif message.text == 'Противопоказания к гипотермии':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, '- масса менее 1800г, гестационный возраст менее 35нед\n'
+                                              '- возраст на момент принятия решения больше 6 часов\n'
+                                              '- тяжёлые ВПР, требующие срочного хир. вмешательства\n'
+                                              '- тяжёлые ВПР несовместимые с жизнью\n'
+                                              '- выявление при обследовании внутричерепного кровоизлияния. При подозрении '
+                                              'целесообразно провести КТ/МРТ до начала гипотермии\n'
+                                              '- отказа от проведения процедуры законных представителей.')
+        elif message.text == 'Действия на этапе роддома':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, '- контроль КЩС крови в первые 60мин\n'
+                                              '- установка ректального термодатчика (диаметр 2мм, глубина 5см)\n'
+                                              '- начать гипотермию до 33.5-34.0С, контроль каждые 15мин, время '
+                                              'достижения целевых цифр 60мин\n'
+                                              '- открытая система, кожа открыта, подгузник подложен, но не застёгнут\n'
+                                              '- при необходимости доп.охлаждения - исключить прямой контакт с кожей (5-15см)\n'
+                                              '- провести НСДГ, ЭЭГ при тех.возможности\n'
+                                              '- при отсутствии показаний - прекратить и постепенно согреть 0.5С/час')
+        elif message.text == 'Этап согревания':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Гипотермия проводится в течение 72 часов.\n'
+                                              '- согревание 0.3-0.5С/час до ректальной 37С. (7-9часов)\n'
+                                              '- при экстренном прекращении гипотермии - скорость та же\n'
+                                              '- контроль ректальной температуры - ещё в течение 24часов\n'
+                                              '- судороги при согревании - прекратить согревание, провести '
+                                              'противосудорожную терапию, продолжить согревать не ранее, чем '
+                                              'через 2 часа после прекращения судорог\n'
+                                              '- согревание - возможно: вазодилятация -> гипотензия. Коррекция 10мл/кг Nacl 0.9%')
+        elif message.text == 'Экстренное прекращение гипотермии':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, '- невозможность скорректировать гипоксемию (SpO2 менее 90%)\n'
+                                              '- признаки жизнеугрожающей коагулопатии, не коррегируется стандартной терапией\n'
+                                              '- выявление внутричерепного кровоизлияния\n'
+                                              '- тяжёлые, некупирующиеся нарушения сердечного ритма\n'
+                                              '- стойкие гемодинамические нарушения, которые не купируются восполнением ОЦК '
+                                              'и применением инотропных препаратов')
+        elif message.text == 'Обследования при гипотермии':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Приказ Минздрава от 10.05.2017 №203н\n'
+                                              'При поступлении в ОРИТН:\n'
+                                              '- лаборатория: ОАК, ОАМ, БХ, КЩС, глюкоза, коагулограмма, бак.исследования\n'
+                                              '- НСГ, R-графия, ЭхоКГ\n'
+                                              '- оценка по Sarnat в модификации Stoll B., Kliegmann (2004)\n'
+                                              'После окончания гипотермии:\n'
+                                              '- НСГ 3, 7-10сут\n'
+                                              '- МРТ 14-21сут')
+            photo = open('Pictures/Klassif GIE Kliegmann.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'Целевые витальные показатели при гипотермии':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Сопутствующую интенсивную терапию проводить по общепринятым правилам.\n'
+                                              '- среднее АД 45-65мм.рт.ст.\n'
+                                              '- SpO2 - 90-95%\n'
+                                              '- Р СО2 - 35-55 мм.рт.ст.\n'
+                                              '- Р О2 - 60-80 мм.рт.ст.\n'
+                                              '- электролиты, глюкоза в пределах нормы\n'
+                                              '- ЧСС 80-120. При снижении ниже 80 - исключить избыточную седацию')
+        elif message.text == 'Особенности проведения гипотермии':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, '- смена положения каждые 6 часов\n'
+                                              '- ИВЛ не обязательное условие\n'
+                                              '- гипо и гиперкапния одинаково опасны как повреждающие мозг факторы\n'
+                                              '- гемодинамическая терапия по общепринятым правилам, АД выше целевых значений\n'
+                                              '- стартовая инфузия 60мл/кг*сут\n'
+                                              '- при отсутствии противопоказаний возможно как парентеральное так и '
+                                              'энтеральное питание по протоколу\n'
+                                              '- гипотермия - не показание к АБ-терапии, при необходимости - пенициллины + '
+                                              'аминогликозиды\n'
+                                              '- показание к противосудорожной терапии - судороги или изменения на ЭЭГ\n'
+                                              '- показание к наркотическим анальгетикам - наличие дрожи\n'
+                                              '- снижение температуры тела на 3.5С в среднем на 30% снижает коагуляцию, '
+                                              'не требует лечения в отсутствии кровоточивости, при наличии - СЗП')
+
         elif message.text == 'В начало':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Лекарства')
@@ -531,4 +638,3 @@ def bot_message(message):
 
 # RUN
 bot.infinity_polling()
-
