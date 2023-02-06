@@ -1,6 +1,8 @@
 import telebot
 from telebot import types
-TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token from @BotFather
+#TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token for real Bot
+
+TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token for testing
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -22,13 +24,13 @@ def ID_list (zz):
     with open('tumbd.txt','w') as f:
         f.write(ww)
 
-new_list =[]
-with open('tumbd.txt', 'r') as f_rass:
-    rass_list = f_rass.readlines()
-    for rass in rass_list:
-        x_rass = int(rass[:12])
-        bot.send_message(text='Я буду иногда тестить тут и перезапускать, поэтому тебе могут '
-                              'приходить сообщения ), напиши, когда придёт в первый раз', chat_id=x_rass)
+# new_list =[]
+# with open('tumbd.txt', 'r') as f_rass:
+#     rass_list = f_rass.readlines()
+#     for rass in rass_list:
+#         x_rass = int(rass[:12])
+#         bot.send_message(text='Обновление.'
+#                               'Добавлено АБ: Меропенем', chat_id=x_rass)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -103,18 +105,19 @@ def bot_message(message):
         elif message.text == 'Антибиотики':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             butt1 = types.KeyboardButton('Амикацин')
-            butt2 = types.KeyboardButton('Ампициллин+сульбактам')
-            butt3 = types.KeyboardButton('Гентамицин')
-            butt4 = types.KeyboardButton('Ванкомицин')
-            butt5 = types.KeyboardButton('Цефтриаксон')
-            butt6 = types.KeyboardButton('Тиенам')
-            butt7 = types.KeyboardButton('Ко-тримоксазол')
-            butt8 = types.KeyboardButton('Сульперазон')
-            butt9 = types.KeyboardButton('Тазоцин')
-            butt10 = types.KeyboardButton('Ципрофлоксацин')
-            butt11 = types.KeyboardButton('Максиктам')
+            butt2 = types.KeyboardButton('Гентамицин')
+            butt3 = types.KeyboardButton('Ампициллин+сульбактам')
+            butt4 = types.KeyboardButton('Тазоцин')
+            butt5 = types.KeyboardButton('Ванкомицин')
+            butt6 = types.KeyboardButton('Ципрофлоксацин')
+            butt7 = types.KeyboardButton('Сульперазон')
+            butt8 = types.KeyboardButton('Цефтриаксон')
+            butt9 = types.KeyboardButton('Максиктам')
+            butt10 = types.KeyboardButton('Тиенам')
+            butt11 = types.KeyboardButton('Меропенем')
+            butt12 = types.KeyboardButton('Ко-тримоксазол')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9, butt10, butt11, butback)
+            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butt9, butt10, butt11, butt12, butback)
             bot.send_message(message.chat.id, 'Выберите нужный антибиотик'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Ампициллин+сульбактам':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -149,7 +152,7 @@ def bot_message(message):
                                               '40мг - 1мл\n'
                                               '1р/сут\n'
                                               'до 7 дней\n'
-                                              'Off Label до 1 мес\n'
+                                              'Off Label до 1 мес.\n'
                                               'Конечная концентрация 1мг/мл')
         elif message.text == 'Ванкомицин':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -179,7 +182,7 @@ def bot_message(message):
                                               '4р/сут\n'
                                               '500мг - 100мл\n'
                                               'Длительность индивидуально\n'
-                                              'Off Label до 3 мес\n'
+                                              'Off Label до 3 мес.\n'
                                               'Конечная концентрация 5мг/мл')
         elif message.text == 'Ко-тримоксазол':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -233,6 +236,14 @@ def bot_message(message):
                                               '10 дней\n'
                                               'Off Label + до 2х мес.\n'
                                               'Конечная концентрация 40мг/мл')
+        elif message.text == 'Меропенем':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Меропенем\n'
+                                              '10-20мг/кг\n'
+                                              '1000мг - 20мл\n'
+                                              '3р/сут\n'
+                                              'Off Label + до 3х мес.\n'
+                                              'Конечная концентрация 20мг/мл')
 
         elif message.text == 'Миорелаксанты':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
