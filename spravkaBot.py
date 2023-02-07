@@ -30,7 +30,7 @@ def ID_list (zz):
 #     for rass in rass_list:
 #         x_rass = int(rass[:12])
 #         bot.send_message(text='Обновление.'
-#                               'Добавлено АБ: Меропенем', chat_id=x_rass)
+#                               'Добавлено АБ: Меропенем. Патологии: Желтуха новорожденных', chat_id=x_rass)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -98,8 +98,9 @@ def bot_message(message):
             butt1 = types.KeyboardButton('БЛД')
             butt2 = types.KeyboardButton('Метаболические нарушения')
             butt3 = types.KeyboardButton('Гипотермия')
+            butt4 = types.KeyboardButton('Желтуха новорожденных')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butback)
+            markup.add(butt1, butt2, butt3, butt4, butback)
             bot.send_message(message.chat.id, 'Выберите патологию'.format(message.from_user),reply_markup=markup)
 
         elif message.text == 'Антибиотики':
@@ -634,6 +635,64 @@ def bot_message(message):
                                               '- показание к наркотическим анальгетикам - наличие дрожи\n'
                                               '- снижение температуры тела на 3.5С в среднем на 30% снижает коагуляцию, '
                                               'не требует лечения в отсутствии кровоточивости, при наличии - СЗП')
+
+        elif message.text == 'Желтуха новорожденных':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'В основе - клинические рекомендации 2016г\n'
+                                              'Р59.0 Неонатальная желтуха, связанная с преждевременным родоразрешением\n'
+                                              'Р59.9 Неонатальная желтуха неуточнённая\n'
+                                              'Гипербилирубинемия - повышение билирубине в сыворотке крови\n'
+                                              '>256мкмоль/л при ГВ больше 35 нед\n'
+                                              '>171мкмоль/л при ГВ меньше 35 нед\n'
+                                              'Визуально: >67мкмоль/л у доношенных, >120мкмоль/л у недоношенных')
+            butt1 = types.KeyboardButton('Билирубиновая энцефалопатия')
+            butt2 = types.KeyboardButton('Измерение уровня билирубина')
+            butt3 = types.KeyboardButton('Фототерапия при желтухе')
+            butt4 = types.KeyboardButton('Этап согревания')
+            butt5 = types.KeyboardButton('Экстренное прекращение гипотермии')
+            butt6 = types.KeyboardButton('Обследования при гипотермии')
+            butt7 = types.KeyboardButton('Целевые витальные показатели при гипотермии')
+            butt8 = types.KeyboardButton('Особенности проведения гипотермии')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butback)
+            bot.send_message(message.chat.id, 'Что вы хотите посмотреть про желтуху новорожденных?'.format(message.from_user),reply_markup=markup)
+        elif message.text == 'Билирубиновая энцефалопатия':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'I фаза: нарастание интоксикации. Угнетение: апноэ, апатия, монотонный крик, срыгивания. '
+                                              'Обычно 4й день жизни. При ОЗПК - изменения обратимы\n'
+                                              'II фаза: спастическая. Спастичность, ригидность затылочных мышц, опистотонус, мозговой крик, '
+                                              'крупноразмашистый тремор, нистагм, апноэ, летаргия, судороги. Дни-недели. Поражения ЦНС необратимы.\n'
+                                              'I и II - острая билирубиновая энцефалопатия. У глубоконедоношенных маскируется другой патологией\n'
+                                              'III фаза: ложного благополучия (2-3 мес.). Полное или частичное исчезновение спастичности\n'
+                                              'IV фаза: формирование неврологических осложнений (после 3-5мес.). Парезы, параличи, атетоз, '
+                                              'глухота, ДЦП, задержка психического развития')
+            photo = open('Pictures/Bilirubin Encefalopatia.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'Измерение уровня билирубина':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Визуальная оценка - шкала Крамера. У доношенных, с нормальной массой тела.')
+            photo = open('Pictures/Zeltuha Kramer.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            bot.send_message(message.chat.id, 'Транскутанное измерение.\n'
+                                              'Прямая зависимость с уровнем в крови от 100 до 255мкмоль/л\n'
+                                              'Только в области лба или грудины\n'
+                                              'Не используется после начала фототерапии\n'
+                                              'Только при ГВ более 35 недель.')
+            bot.send_message(message.chat.id, 'Стандартное исследование в крови.\n'
+                                              '- Всем с желтухой, менее 35 нед.\n'
+                                              '- Всем с проявлением желтухи в первые 24 часа\n'
+                                              '- С признаками ГБН или другими рисками патологической желтухи\n'
+                                              '- Больше 35нед, если транскутанно: >140 в возрасте 24-48ч\n'
+                                              '>200 в возрасте 48-72ч\n'
+                                              '>250 в возрасте старше 72ч\n'
+                                              '- Всем, получающим фототерапию (каждые 12-24ч)')
+            elif message.text == 'Фототерапия при желтухе':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Комбинированная фототерапия (2 и более источников), хотя бы при одном признаке:'
+                                              '- почасовой прирост ОБС > 6.8мкмоль/л*час'
+                                              '- через 72ч уровень ОБС менее 50мкмоль/л от порогового значения для ЗПК'
+                                              '- через 6ч фототерапии уровень ОБС повышается или не снижается')
+
 
         elif message.text == 'В начало':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
