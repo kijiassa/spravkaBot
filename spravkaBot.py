@@ -648,13 +648,9 @@ def bot_message(message):
             butt1 = types.KeyboardButton('Билирубиновая энцефалопатия')
             butt2 = types.KeyboardButton('Измерение уровня билирубина')
             butt3 = types.KeyboardButton('Фототерапия при желтухе')
-            butt4 = types.KeyboardButton('Этап согревания')
-            butt5 = types.KeyboardButton('Экстренное прекращение гипотермии')
-            butt6 = types.KeyboardButton('Обследования при гипотермии')
-            butt7 = types.KeyboardButton('Целевые витальные показатели при гипотермии')
-            butt8 = types.KeyboardButton('Особенности проведения гипотермии')
+            butt4 = types.KeyboardButton('ОЗПК (операция заменного переливания крови)')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butt4, butt5, butt6, butt7, butt8, butback)
+            markup.add(butt1, butt2, butt3, butt4, butback)
             bot.send_message(message.chat.id, 'Что вы хотите посмотреть про желтуху новорожденных?'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Билирубиновая энцефалопатия':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -686,13 +682,32 @@ def bot_message(message):
                                               '>200 в возрасте 48-72ч\n'
                                               '>250 в возрасте старше 72ч\n'
                                               '- Всем, получающим фототерапию (каждые 12-24ч)')
-            elif message.text == 'Фототерапия при желтухе':
+        elif message.text == 'Фототерапия при желтухе':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bot.send_message(message.chat.id, 'Комбинированная фототерапия (2 и более источников), хотя бы при одном признаке:'
-                                              '- почасовой прирост ОБС > 6.8мкмоль/л*час'
-                                              '- через 72ч уровень ОБС менее 50мкмоль/л от порогового значения для ЗПК'
+            bot.send_message(message.chat.id, 'Комбинированная фототерапия (2 и более источников), хотя бы при одном признаке:\n'
+                                              '- почасовой прирост ОБС > 6.8мкмоль/л*час\n'
+                                              '- через 72ч уровень ОБС менее 50мкмоль/л от порогового значения для ЗПК\n'
                                               '- через 6ч фототерапии уровень ОБС повышается или не снижается')
-
+            photo = open('Pictures/Phototherapy_Massa.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            photo = open('Pictures/Phototherapy_Gest.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'ОЗПК (операция заменного переливания крови)':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Кровь и компоненты 150-170мл/кг для доношенных и 170-180мл/кг для недоношенных. '
+                                              'Соотношение эр.массы/взвеси и  СЗП 2:1\n'
+                                              'Первая порция на анализ билирубина.\n'
+                                              'Объём одного замещения 10-20мл/кг для доношенных и 5-10мл/кг для недоношенных.\n'
+                                              '3-4мл/мин. 2 шприца эр.массы/ 1 шприц СЗП.\n'
+                                              'После каждых 100мл: 1-2мл 10% кальция глюконата в 5мл 5% глюкозы. Только между эр.массой!\n'
+                                              'Перед окончанием - анализ на билирубин. Должно быть ниже в 2 раза.\n'
+                                              'Кормить через 3-4 часа.\n'
+                                              'Продолжить фототерапию.\n'
+                                              'Контроль глюкозы через 1 час. Контроль билирубина через 12 часов.')
+            photo = open('Pictures/OZPK_Massa.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            photo = open('Pictures/OZPK_Gest.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
 
         elif message.text == 'В начало':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
