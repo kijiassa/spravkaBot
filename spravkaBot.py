@@ -30,7 +30,7 @@ def ID_list (zz):
 #     for rass in rass_list:
 #         x_rass = int(rass[:12])
 #         bot.send_message(text='Обновление.'
-#                               'Добавлено АБ: Меропенем. Патологии: Желтуха новорожденных', chat_id=x_rass)
+#                               'Добавлено АБ: Меропенем. Патологии: ГБН. Желтуха', chat_id=x_rass)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -99,6 +99,7 @@ def bot_message(message):
             butt2 = types.KeyboardButton('Метаболические нарушения')
             butt3 = types.KeyboardButton('Гипотермия')
             butt4 = types.KeyboardButton('ГБН. Желтуха')
+            butt5 = types.KeyboardButton('Парентеральное питание (в работе)')
             butback = types.KeyboardButton('В начало')
             markup.add(butt1, butt2, butt3, butt4, butback)
             bot.send_message(message.chat.id, 'Выберите патологию'.format(message.from_user),reply_markup=markup)
