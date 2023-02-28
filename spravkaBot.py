@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-#TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token for real Bot
+#TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token for real Bot
 
 TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token for testing
 
@@ -29,8 +29,8 @@ def ID_list (zz):
 #     rass_list = f_rass.readlines()
 #     for rass in rass_list:
 #         x_rass = int(rass[:12])
-#         bot.send_message(text='Обновление.'
-#                               'Добавлено АБ: Меропенем. Патологии: ГБН. Желтуха', chat_id=x_rass)
+#         bot.send_message(text='Обновление. Антибиотики +Бактопенем. Парентеральное питание кратко.\n'
+#                               'Напишите, пожалуйста, что бы вы хотели ещё в этом боте.', chat_id=x_rass)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -99,9 +99,9 @@ def bot_message(message):
             butt2 = types.KeyboardButton('Метаболические нарушения')
             butt3 = types.KeyboardButton('Гипотермия')
             butt4 = types.KeyboardButton('ГБН. Желтуха')
-            butt5 = types.KeyboardButton('Парентеральное питание (в работе)')
+            butt5 = types.KeyboardButton('Парентеральное питание')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butt3, butt4, butback)
+            markup.add(butt1, butt2, butt3, butt4, butt5, butback)
             bot.send_message(message.chat.id, 'Выберите патологию'.format(message.from_user),reply_markup=markup)
 
         elif message.text == 'Антибиотики':
@@ -115,7 +115,7 @@ def bot_message(message):
             butt7 = types.KeyboardButton('Сульперазон')
             butt8 = types.KeyboardButton('Цефтриаксон')
             butt9 = types.KeyboardButton('Максиктам')
-            butt10 = types.KeyboardButton('Тиенам')
+            butt10 = types.KeyboardButton('Имипинем-циластатин')
             butt11 = types.KeyboardButton('Меропенем')
             butt12 = types.KeyboardButton('Ко-тримоксазол')
             butback = types.KeyboardButton('В начало')
@@ -177,9 +177,9 @@ def bot_message(message):
                                               '15:00\n'
                                               '1р/сут\n'
                                               'от 4 до 14 дней')
-        elif message.text == 'Тиенам':
+        elif message.text == 'Имипинем-циластатин':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bot.send_message(message.chat.id, 'Тиенам (Имипинем-циластатин)\n'
+            bot.send_message(message.chat.id, 'Имипинем-циластатин (Тиенам, Бактопенем)\n'
                                               '60мг/кг*сут\n'
                                               '4р/сут\n'
                                               '500мг - 100мл\n'
@@ -747,6 +747,27 @@ def bot_message(message):
             photo = open('Pictures/OZPK_Massa.png', 'rb')
             bot.send_photo(message.chat.id, photo)
             photo = open('Pictures/OZPK_Gest.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+
+        elif message.text == 'Парентеральное питание':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'В основе - протокол 2014г')
+            photo = open('Pictures/Parenteral Pitanie Full Tab.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            photo = open('Pictures/Parenteralnoe Pitanie Electrolit Full.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+            butt1 = types.KeyboardButton('Жидкость. Потребность')
+            butt2 = types.KeyboardButton('Энергия. Потребность')
+            butback = types.KeyboardButton('В начало')
+            markup.add(butt1, butt2, butback)
+            bot.send_message(message.chat.id, 'Что вы хотите посмотреть про парентеральное питание?'.format(message.from_user),reply_markup=markup)
+        elif message.text == 'Жидкость. Потребность':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Parenteral Pitanie Zidkost.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'Энергия. Потребность':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            photo = open('Pictures/Parenteral Pitanie Zidkost.png', 'rb')
             bot.send_photo(message.chat.id, photo)
 
         elif message.text == 'В начало':
