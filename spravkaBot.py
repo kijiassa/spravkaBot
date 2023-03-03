@@ -751,23 +751,55 @@ def bot_message(message):
 
         elif message.text == 'Парентеральное питание':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bot.send_message(message.chat.id, 'В основе - протокол 2014г')
+            bot.send_message(message.chat.id, 'В основе - протокол 2014г.\n'
+                                              'Показано если ЭП не покрывает 90% от необходимого калоража и потребностей в питательных в-вах.\n'
+                                              'Противопоказано на фоне реанимационных мероприятиях. Возобновление сразу после стабилизации.')
             photo = open('Pictures/Parenteral Pitanie Full Tab.png', 'rb')
             bot.send_photo(message.chat.id, photo)
             photo = open('Pictures/Parenteralnoe Pitanie Electrolit Full.png', 'rb')
             bot.send_photo(message.chat.id, photo)
             butt1 = types.KeyboardButton('Жидкость. Потребность')
             butt2 = types.KeyboardButton('Энергия. Потребность')
+            butt3 = types.KeyboardButton('Белки. Потребность')
+            butt4 = types.KeyboardButton('Жиры. Потребность')
             butback = types.KeyboardButton('В начало')
-            markup.add(butt1, butt2, butback)
+            markup.add(butt1, butt2, butt3, butt4, butback)
             bot.send_message(message.chat.id, 'Что вы хотите посмотреть про парентеральное питание?'.format(message.from_user),reply_markup=markup)
         elif message.text == 'Жидкость. Потребность':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Основная задача - обеспечение достаточной прибавки массы тела с 5-7 дня. ЭНМТ:18-21г/кг. >1500г: 14-15г/кг. Донош 7-8(до 14)г/кг.\n'
+                                              'Физиологическая убыль массы не более 10%.\n'
+                                              'Объём ЭП до 25мл/кг не учитывается\n'
+                                              'Уровень Na поддерживается 135-145. Меньше - повреждние мозга, больше - ВЖК.\n'
+                                              'Увеличение Na говорит о дегидратации. Увеличение - гипергидратация.\n'
+                                              'ЭНМТ - с/м "поздней гипонатриемии" (нарушение почек и повышение потребления Na)')
             photo = open('Pictures/Parenteral Pitanie Zidkost.png', 'rb')
             bot.send_photo(message.chat.id, photo)
         elif message.text == 'Энергия. Потребность':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            photo = open('Pictures/Parenteral Pitanie Zidkost.png', 'rb')
+            bot.send_message(message.chat.id, 'С первых суток обязательно Энергия покоя.\n'
+                                              'Увеличение калорийности еждневно 10-15ккал/кг до 105ккал/кг к 7-10сут при полном ПП. Что соотв. 120ккал/кг при ЭП.\n'
+                                              'При частичном ПП увеличение в том же темпе до 120ккал/кг к 7-10сут.\n'
+                                              'Избыток небелковых калорий используется для синтеза жиров.')
+            photo = open('Pictures/Parenteralnoe Pitanie Energy.png', 'rb')
+            bot.send_photo(message.chat.id, photo)
+        elif message.text == 'Белки. Потребность':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Основная задача - пластическая.\n'
+                                              'Оценка достаточности: Антропометрия. Метаболические индексы (альбумин, мочевина, ацидоз). Индикаторный метод окисления АмК.\n'
+                                              'Мочевина каждые 7-10д. Менее 1.8ммоль/л - недостаточность Б. Повышение может быть повышенный катаболизм Б при недостатки других.\n'
+                                              'ОНМТ, ЭНМТ - 3г/кг*сут в первые 24ч безопасно и связано с лучшей прибавкой массы. Начать в первые часы.\n'
+                                              'Альбумин, СЗП, компоненты крови - не являются источниками белка.\n'
+                                              'Метаболический ацидоз - не противопоказание.\n'
+                                              'Оптимальное соотношение белка и небелковых калорий от 4 до 2.5г/100ккал. От менее к более зрелым детям.')
+        elif message.text == 'Жиры. Потребность':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.chat.id, 'Энергия. Созревание ГМ и сетчатки. Клеточные мембраны и сурфактант. Простогландины, лейкотриенты и др.медиаторы.\n'
+                                              'При необходимости ограничения - не меньше 0.5-1г/кг*сут (дефицит эссенциальных кислот)\n'
+                                              '1г - 10ккал. Защита инфузии от ультрафиолета, max близко, Ж-фильтр. Полное ПП - не более 3г/кг.\n'
+                                              'Контроль - уровень триглицеридов (не выше 2.26ммоль/л (200мг/дл). При превышении снизить Ж на 0.5г/кг. Амфотерицин и '
+                                              'глюкокортикоиды повышают конц.триглицеридов.')
+            photo = open('Pictures/Parenteralnoe Pitanie Zhiri.png', 'rb')
             bot.send_photo(message.chat.id, photo)
 
         elif message.text == 'В начало':
