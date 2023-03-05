@@ -1,8 +1,8 @@
 import telebot
 from telebot import types
-TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token for real Bot
+#TOKEN = '5619567760:AAE7Yc2-Q2ngDuU0B68Gxt4KpjDjGB5aTog' # bot token for real Bot
 
-#TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token for testing
+TOKEN = '5984037791:AAGJacq-SfwcklPBWUNSEgguGxZuRby12qY' # bot token for testing
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -24,13 +24,13 @@ def ID_list (zz):
     with open('tumbd.txt','w') as f:
         f.write(ww)
 
-new_list =[]
-with open('tumbd.txt', 'r') as f_rass:
-    rass_list = f_rass.readlines()
-    for rass in rass_list:
-        x_rass = int(rass[:12])
-        bot.send_message(text='Обновление. Антибиотики +Бактопенем. Парентеральное питание.\n'
-                              'Напишите, пожалуйста, что бы вы хотели ещё в этом боте. Можно в личку, телефон все знают.', chat_id=x_rass)
+# new_list =[]
+# with open('tumbd.txt', 'r') as f_rass:
+#     rass_list = f_rass.readlines()
+#     for rass in rass_list:
+#         x_rass = int(rass[:12])
+#         bot.send_message(text='Обновление. Антибиотики +Бактопенем. Парентеральное питание.\n'
+#                               'Напишите, пожалуйста, что бы вы хотели ещё в этом боте. Можно в личку, телефон все знают.', chat_id=x_rass)
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
